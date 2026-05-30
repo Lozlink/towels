@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 /**
  * Admin login page. Posts credentials to `/api/admin/login`, which sets the
- * httpOnly `sm_admin` cookie on success, then routes to the dashboard. This
+ * httpOnly `zy_admin` cookie on success, then routes to the dashboard. This
  * page is exempt from the middleware redirect (see `src/middleware.ts`).
  */
 export default function AdminLoginPage() {
@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
         }}
       >
         <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 600 }}>
-          Saltmist admin
+          ZYNZYA admin
         </h1>
         <p style={{ marginTop: 4, marginBottom: '1.5rem', color: '#6b6760', fontSize: '0.875rem' }}>
           Sign in to manage orders.

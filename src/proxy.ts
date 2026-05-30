@@ -2,17 +2,21 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { ADMIN_COOKIE_NAME, verifyAdminSession } from '@/lib/auth';
 
 /**
- * Edge middleware that protects the admin *pages* (`/admin/*`). It verifies the
- * `sm_admin` JWT and redirects unauthenticated visitors to `/admin/login`.
+ * Edge proxy that protects the admin *pages* (`/admin/*`). It verifies the
+ * `zy_admin` JWT and redirects unauthenticated visitors to `/admin/login`.
+ *
+ * Next 16 renamed the `middleware` file convention to `proxy` (same runtime,
+ * same matcher semantics); this file is the renamed successor of the former
+ * `src/middleware.ts`.
  *
  * Scope is deliberately tight (see `config.matcher`): it ONLY runs on `/admin`
  * routes and never touches the storefront or the guest checkout under
  * `/api/orders`. The login page is exempted explicitly so users can reach it.
  *
  * API authorization is enforced separately by `requireAdmin` inside the admin
- * route handlers — middleware here is just for the page redirect UX.
+ * route handlers — the proxy here is just for the page redirect UX.
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Always allow the login page through, else we'd redirect-loop.

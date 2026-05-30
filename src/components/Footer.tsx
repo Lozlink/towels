@@ -1,4 +1,4 @@
-import { FacebookIcon, InstagramIcon, TikTokIcon, WaveMark } from "./icons";
+import { FacebookIcon, InstagramIcon, TikTokIcon, TribalMark } from "./icons";
 
 const SHOP_LINKS = [
   { href: "#towels", label: "Bath Towel" },
@@ -16,9 +16,9 @@ const LEARN_LINKS = [
 ] as const;
 
 const SOCIALS = [
-  { href: "#", label: "Saltmist on Facebook", Icon: FacebookIcon },
-  { href: "#", label: "Saltmist on Instagram", Icon: InstagramIcon },
-  { href: "#", label: "Saltmist on TikTok", Icon: TikTokIcon },
+  { href: "#", label: "ZYNZYA on Facebook", Icon: FacebookIcon },
+  { href: "#", label: "ZYNZYA on Instagram", Icon: InstagramIcon },
+  { href: "#", label: "ZYNZYA on TikTok", Icon: TikTokIcon },
 ] as const;
 
 export function Footer() {
@@ -31,15 +31,15 @@ export function Footer() {
           <div>
             <a
               href="#top"
-              className="mb-4 flex items-center gap-2.5 font-display text-2xl font-semibold text-bone"
-              aria-label="Saltmist home"
+              className="mb-4 flex items-center gap-2.5 font-display text-2xl font-extrabold tracking-[0.04em] text-bone"
+              aria-label="ZYNZYA home"
             >
-              <WaveMark className="h-[18px] w-[30px] flex-none" />
-              Saltmist
+              <TribalMark className="h-[26px] w-[29px] flex-none" />
+              ZYNZYA
             </a>
             <p className="max-w-[280px] text-[14.5px] text-bone/60">
-              Plush, quick-drying bath towels made with bamboo viscose and
-              cotton. Softness, settled.
+              Towels woven from 100% bamboo fibre — unblended, soft and
+              breathable. 100% bamboo. Nothing blended in.
             </p>
             <div className="mt-[22px] flex gap-3">
               {SOCIALS.map(({ href, label, Icon }) => (
@@ -90,10 +90,10 @@ export function Footer() {
               Contact
             </h5>
             <a
-              href="mailto:hello@saltmist.com.au"
+              href="mailto:hello@zynzya.com.au"
               className="block py-1.5 text-[14.5px] text-bone/[0.78] transition-colors hover:text-bone"
             >
-              hello@saltmist.com.au
+              hello@zynzya.com.au
             </a>
             <a
               href="#signup"
@@ -112,14 +112,14 @@ export function Footer() {
 
         <div className="flex flex-wrap items-center justify-between gap-[18px] border-t border-bone/15 pt-[26px]">
           <p className="m-0 text-[13px] text-bone/55">
-            © {year} Saltmist. All rights reserved.
+            © {year} ZYNZYA. All rights reserved.
           </p>
           <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-bone/80">
-            <span className="h-1.5 w-1.5 rounded-full bg-terracotta" />
+            <span className="h-1.5 w-1.5 rounded-full bg-marigold" />
             Designed in Australia · Made in Thailand
           </span>
           <p className="m-0 text-[13px] text-bone/55">
-            70% bamboo viscose, 30% cotton · 650 GSM · Wash cold, no softener.
+            100% bamboo fibre · 650 GSM · Wash cold, no softener.
           </p>
         </div>
       </div>

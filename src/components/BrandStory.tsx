@@ -13,7 +13,7 @@ export function BrandStory() {
       <div className="wrap-wide">
         <Reveal>
           <p className="index-tag mb-8 flex items-center gap-3 text-sand">
-            <b className="text-terracotta">03</b>
+            <b className="text-marigold">03</b>
             <span className="h-px w-9 bg-bone/30" aria-hidden="true" />
             Our story
           </p>
@@ -21,13 +21,13 @@ export function BrandStory() {
           <blockquote className="m-0 max-w-[18ch]">
             <p
               id="story-heading"
-              className="display-lg font-semibold text-bone"
+              className="display-lg font-extrabold text-bone"
             >
-              We&apos;d rather be{" "}
-              <span className="fr-italic font-normal text-terracotta">
+              One fibre, and{" "}
+              <span className="fr-italic font-normal text-marigold">
                 plain about it
-              </span>{" "}
-              than over-promise.
+              </span>
+              .
             </p>
           </blockquote>
         </Reveal>
@@ -35,25 +35,25 @@ export function BrandStory() {
         <div className="mt-14 grid grid-cols-12 gap-x-16 gap-y-10">
           <Reveal className="col-span-12 lg:col-span-7 lg:col-start-5">
             <p className="max-w-[58ch] text-lg leading-relaxed text-bone/80">
-              Saltmist started with a simple test: the towel you actually reach
-              for. Not the showroom one — the everyday one that feels plush,
-              dries fast, and still looks good a year in.
+              ZYNZYA started with one decision: make a bamboo towel that is
+              actually bamboo. Not a viscose blend dressed up in &ldquo;bamboo&rdquo;
+              marketing — the real fibre, unblended, from a fast-growing plant.
             </p>
             <p className="max-w-[58ch] text-lg leading-relaxed text-bone/80">
-              Our towels are woven from a bamboo-viscose and cotton blend at 650
-              GSM, so they&apos;re dense and soft underhand but quick to dry on
-              the rail. They&apos;re made in Thailand by a mill we work with
-              directly, and we label them plainly: what they&apos;re made of,
-              how they wash, nothing dressed up. No miracle claims. Just a
-              genuinely good towel — and a calmer few minutes in your day.
+              Our towels are woven from 100% bamboo fibre at 650 GSM — soft and
+              breathable, naturally absorbent, and biodegradable at the end of
+              their life. They&apos;re made in Thailand by a mill we work with
+              directly, and we label them plainly: what they&apos;re made of and
+              how they wash, nothing dressed up. We only put a claim on the page
+              once we can stand behind it.
             </p>
 
             <div className="mt-9 flex items-center gap-3.5 border-t border-bone/15 pt-7">
-              <span className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-gradient-to-br from-terracotta to-sand font-display font-bold text-white">
-                S
+              <span className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-gradient-to-br from-mist to-marigold font-display font-extrabold text-forest">
+                Z
               </span>
               <div>
-                <b className="block text-[15px]">The Saltmist team</b>
+                <b className="block text-[15px]">The ZYNZYA team</b>
                 <span className="text-[13px] text-bone/60">
                   Designed in Australia · Made in Thailand
                 </span>

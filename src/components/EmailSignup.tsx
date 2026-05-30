@@ -36,7 +36,7 @@ export function EmailSignup() {
             <div className="col-span-12 lg:col-span-6">
               <p className="index-tag mb-5 flex items-center gap-3 text-white/85">
                 <span className="h-px w-9 bg-white/40" aria-hidden="true" />
-                Settle in
+                Join the weave
               </p>
               <h2 className="display-lg max-w-[12ch] font-semibold text-white">
                 10% off your first order.
@@ -54,7 +54,7 @@ export function EmailSignup() {
                   <CheckCircleIcon className="h-[26px] w-[26px] flex-none" />
                   <span>
                     You&apos;re in. Check your inbox for{" "}
-                    <strong>SETTLE10</strong>.
+                    <strong>BAMBOO10</strong>.
                   </span>
                 </div>
               ) : (

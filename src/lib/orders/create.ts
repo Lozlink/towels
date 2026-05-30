@@ -7,11 +7,11 @@ const log = createLogger('orders');
 
 const INITIAL_STATUS: OrderStatus = 'pending_payment';
 
-/** Generate a human-friendly order number: SM- + base36 timestamp + short random. */
+/** Generate a human-friendly order number: ZY- + base36 timestamp + short random. */
 export function generateOrderNumber(): string {
   const ts = Date.now().toString(36).toUpperCase();
   const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
-  return `SM-${ts}-${rand}`;
+  return `ZY-${ts}-${rand}`;
 }
 
 export type CreateOrderResult =

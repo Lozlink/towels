@@ -11,7 +11,7 @@ const log = createLogger('api/admin/login');
 /**
  * POST /api/admin/login
  * Body: { username: string, password: string }
- * On valid credentials, signs an admin JWT and sets it as the `sm_admin`
+ * On valid credentials, signs an admin JWT and sets it as the `zy_admin`
  * httpOnly cookie. Returns `{ success: true }`, or `401 { error }` on bad creds.
  * Fails closed (401, not 500) when auth env vars are missing.
  */

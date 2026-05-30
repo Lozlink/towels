@@ -39,7 +39,7 @@ export function buildJsonLd(): JsonLdGraph {
     url: `${SITE_URL}/`,
     slogan: SITE_SLOGAN,
     description:
-      "Saltmist makes plush, quick-drying towels made with bamboo viscose and cotton. Designed in Australia, made in Thailand.",
+      "ZYNZYA makes towels from 100% bamboo fibre — unblended, with no viscose, cotton or polyester. Soft, breathable and biodegradable. Designed in Australia, made in Thailand.",
     logo: `${SITE_URL}/og-image.jpg`,
     areaServed: "AU",
   };
@@ -55,7 +55,7 @@ export function buildJsonLd(): JsonLdGraph {
 
   const itemList: JsonLdNode = {
     "@type": "ItemList",
-    name: "Saltmist towels",
+    name: "ZYNZYA towels",
     itemListElement: PRODUCTS.map((product, index) => ({
       "@type": "ListItem",
       position: index + 1,

@@ -9,7 +9,7 @@ const UUID_RE =
 
 /**
  * GET /api/orders/[id]
- * `id` may be either the order UUID or the human order_number (e.g. SM-XXXX).
+ * `id` may be either the order UUID or the human order_number (e.g. ZY-XXXX).
  * 404 when missing or when the DB isn't configured.
  */
 export async function GET(

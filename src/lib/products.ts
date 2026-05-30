@@ -17,16 +17,16 @@ export interface Product {
 }
 
 /** Single source of cloth truth — kept identical across every SKU for honesty. */
-export const MATERIAL = "70% bamboo viscose, 30% cotton" as const;
+export const MATERIAL = "100% bamboo fibre" as const;
 
 export const PRODUCTS: readonly Product[] = [
   {
     id: "bath",
     sku: "bath-towel",
     name: "The Everyday Bath Towel",
-    desc: "The core hero. Plush, quick-dry, 70 × 140 cm.",
+    desc: "The core hero. 100% bamboo fibre, plush at 650 GSM. 70 × 140 cm.",
     schemaDesc:
-      "Plush 650 GSM bath towel (70 x 140 cm) made with 70% bamboo viscose, 30% cotton. Quick-drying, highly absorbent. Made in Thailand.",
+      "Plush 650 GSM bath towel (70 x 140 cm) made from 100% bamboo fibre — unblended, no viscose, cotton or polyester. Soft, breathable and naturally absorbent. Designed in Australia, made in Thailand.",
     price: 49,
     feature: true,
     tag: "Bestseller",
@@ -35,9 +35,9 @@ export const PRODUCTS: readonly Product[] = [
     id: "sheet",
     sku: "bath-sheet",
     name: "The Bath Sheet",
-    desc: "A larger wrap-around format. 90 × 170 cm.",
+    desc: "A larger wrap-around format in 100% bamboo fibre. 90 × 170 cm.",
     schemaDesc:
-      "Oversized 650 GSM bath sheet (90 x 170 cm) made with 70% bamboo viscose, 30% cotton. Quick-drying, highly absorbent. Made in Thailand.",
+      "Oversized 650 GSM bath sheet (90 x 170 cm) made from 100% bamboo fibre — unblended. Soft, breathable and naturally absorbent. Designed in Australia, made in Thailand.",
     price: 69,
     feature: false,
   },
@@ -45,9 +45,9 @@ export const PRODUCTS: readonly Product[] = [
     id: "hand",
     sku: "hand-towel",
     name: "The Hand Towel",
-    desc: "Everyday basin companion. 40 × 70 cm.",
+    desc: "Everyday basin companion in 100% bamboo fibre. 40 × 70 cm.",
     schemaDesc:
-      "650 GSM hand towel made with 70% bamboo viscose, 30% cotton. Quick-drying and soft. Made in Thailand.",
+      "650 GSM hand towel made from 100% bamboo fibre — unblended. Soft and breathable. Designed in Australia, made in Thailand.",
     price: 24,
     feature: false,
   },
@@ -55,9 +55,9 @@ export const PRODUCTS: readonly Product[] = [
     id: "face",
     sku: "face-cloth-2",
     name: "The Face Cloth (set of 2)",
-    desc: "Soft daily washers. 30 × 30 cm, pair.",
+    desc: "Soft daily washers in 100% bamboo fibre. 30 × 30 cm, pair.",
     schemaDesc:
-      "Set of two soft face cloths made with 70% bamboo viscose, 30% cotton. Made in Thailand.",
+      "Set of two soft face cloths made from 100% bamboo fibre — unblended. Designed in Australia, made in Thailand.",
     price: 19,
     feature: false,
   },
@@ -65,9 +65,9 @@ export const PRODUCTS: readonly Product[] = [
     id: "bundle",
     sku: "complete-bundle",
     name: "The Complete Bundle",
-    desc: "2 bath towels, 2 hand towels, 2 face cloths — your whole bathroom, settled.",
+    desc: "2 bath towels, 2 hand towels, 2 face cloths — your whole bathroom in 100% bamboo fibre.",
     schemaDesc:
-      "Two bath towels, two hand towels and two face cloths made with 70% bamboo viscose, 30% cotton. Made in Thailand.",
+      "Two bath towels, two hand towels and two face cloths made from 100% bamboo fibre — unblended. Designed in Australia, made in Thailand.",
     price: 149,
     was: 181,
     feature: true,

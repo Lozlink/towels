@@ -1,54 +1,77 @@
+import { SUBSTANTIATED_CLAIMS } from "./claims";
 import type { Faq } from "./faqs";
 
 /**
- * FAQ content ported verbatim from the static storefront.
+ * FAQ content for ZYNZYA.
  * `answer` is the richer on-page JSX; `schema` holds the canonical plain-text
- * Q&A used for FAQPage structured data. The honest rayon answer stays first.
+ * Q&A used for FAQPage structured data.
+ *
+ * The flagship trust question — "Is it really 100% bamboo — not viscose?" —
+ * stays FIRST. It is the brand's whole point and is answered plainly, grounded
+ * in the fibre composition the supplier can document. It deliberately makes NO
+ * gated claim (antibacterial, UV, hypoallergenic, absorbency multiples, or any
+ * competitor "toxic process" knock) — those are gated behind
+ * src/lib/claims.ts and only surface when the owner holds the evidence.
  */
 export const FAQS: readonly Faq[] = [
   {
-    id: "bamboo-or-rayon",
-    question: "Is this bamboo or rayon? Tell me straight.",
+    id: "really-bamboo-not-viscose",
+    question: "Is it really 100% bamboo — not viscose?",
     answer: (
       <>
         <p>
-          Straight answer: it&apos;s bamboo <strong>viscose</strong> — a
-          regenerated fibre made from bamboo, blended with cotton. Our exact
-          composition is <strong>70% bamboo viscose, 30% cotton</strong>, and
+          Yes. ZYNZYA towels are{" "}
+          <strong>100% bamboo fibre, unblended</strong> — no viscose, no cotton,
+          no polyester. That&apos;s the whole reason the brand exists, and
           it&apos;s printed on every label.
         </p>
         <p>
-          You&apos;ll see some brands call this &ldquo;bamboo fabric&rdquo; or
-          imply it stays naturally antibacterial. We don&apos;t, because the
-          manufacturing process changes the fibre and those claims aren&apos;t
-          ones we can substantiate. What we can stand behind is how it feels:
-          soft, plush, highly absorbent and quick-drying. That&apos;s what
-          you&apos;re buying, and that&apos;s what we&apos;ll tell you.
+          It&apos;s worth knowing why we keep saying it. A lot of &ldquo;bamboo&rdquo;
+          fabric on the market is actually bamboo <em>viscose</em> (rayon): the
+          plant is chemically dissolved and regenerated into a different fibre.
+          That&apos;s a legitimate textile, but it isn&apos;t the same thing as
+          natural bamboo fibre, and we don&apos;t sell it. Our composition is
+          verified against the supplier&apos;s fibre documentation, and we&apos;d
+          rather earn your trust on this one point than over-claim on a dozen
+          others.
         </p>
+        {/*
+          GATED competitor-process contrast. Renders ONLY when
+          SUBSTANTIATED_CLAIMS.competitorProcessContrast is true (it ships false),
+          because knocking competitors' "toxic process" needs documented, current
+          evidence about those competitors — see CLAIMS.md.
+        */}
+        {SUBSTANTIATED_CLAIMS.competitorProcessContrast ? (
+          <p>
+            By contrast, the viscose process many other &ldquo;bamboo&rdquo;
+            towels rely on uses a harsher chemical route to dissolve and
+            regenerate the fibre. Ours doesn&apos;t.
+          </p>
+        ) : null}
       </>
     ),
     schema: {
-      question: "Is this bamboo or rayon?",
+      question: "Is it really 100% bamboo — not viscose?",
       answer:
-        "It is bamboo viscose — a regenerated fibre made from bamboo, blended with cotton. Our exact composition is 70% bamboo viscose, 30% cotton, printed on every label. We don't claim it is naturally antibacterial, because the manufacturing process changes the fibre and those claims aren't ones we can substantiate. What we stand behind is how it feels: soft, plush, highly absorbent and quick-drying.",
+        "Yes. ZYNZYA towels are 100% bamboo fibre, unblended — no viscose, no cotton, no polyester — and that is printed on every label. Much 'bamboo' fabric on the market is actually bamboo viscose (rayon), where the plant is chemically dissolved and regenerated into a different fibre. That is a legitimate textile but it is not natural bamboo fibre, and we do not sell it. Our composition is verified against the supplier's fibre documentation.",
     },
   },
   {
-    id: "why-bamboo-viscose",
-    question: "Why bamboo viscose instead of plain cotton?",
+    id: "why-bamboo",
+    question: "Why bamboo instead of cotton?",
     answer: (
       <p>
-        It&apos;s a feel and performance choice, not an eco claim. The
-        bamboo-viscose blend has a fluid, cushioned softness in the hand and an
-        open weave that dries quickly on the rail. The 30% cotton adds body and
-        absorbency. Together they hit the 650 GSM plushness we were after
-        without feeling heavy or slow to dry.
+        Bamboo fibre is soft and breathable in the hand and naturally absorbent,
+        which is exactly what you want in a towel. It also comes from a
+        fast-growing, renewable plant and is biodegradable at the end of its
+        life. We weave it to 650 GSM so the towel is substantial and plush
+        without relying on a cotton or synthetic blend to get there.
       </p>
     ),
     schema: {
-      question: "Why bamboo viscose instead of plain cotton?",
+      question: "Why bamboo instead of cotton?",
       answer:
-        "It's a feel and performance choice, not an eco claim. The bamboo-viscose blend has a fluid, cushioned softness and an open weave that dries quickly. The 30% cotton adds body and absorbency, hitting 650 GSM plushness without feeling heavy or slow to dry.",
+        "Bamboo fibre is soft, breathable and naturally absorbent — what you want in a towel. It comes from a fast-growing, renewable plant and is biodegradable at end of life. We weave it to 650 GSM so the towel is substantial and plush without a cotton or synthetic blend.",
     },
   },
   {

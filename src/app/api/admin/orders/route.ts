@@ -8,7 +8,7 @@ const log = createLogger('api/admin/orders');
 /**
  * GET /api/admin/orders  (admin-only)
  * Lists up to 50 most-recent orders for the admin dashboard. Requires a valid
- * `sm_admin` session (401 otherwise). Returns `501` when Supabase isn't
+ * `zy_admin` session (401 otherwise). Returns `501` when Supabase isn't
  * configured, mirroring the rest of the order API's graceful degradation.
  *
  * This is the protected replacement for the previously-public order listing.

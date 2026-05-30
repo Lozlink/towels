@@ -20,16 +20,38 @@ function Icon({ children, ...props }: IconProps) {
   );
 }
 
-export function WaveMark(props: SVGProps<SVGSVGElement>) {
+/**
+ * PLACEHOLDER ZYNZYA brand mark — a geometric "tribal symbol" woven-diamond
+ * emblem in the brand triad (bamboo green / marigold / scarlet). This is a
+ * stand-in: the client will supply their own tribal symbol. To swap it, replace
+ * the SVG body below (and the matching favicon data-URI in app/layout.tsx). See
+ * README → "Logo / brand mark (placeholder)". Kept a fixed three-colour mark so
+ * it reads on both the cream header and the deep-forest footer.
+ */
+export function TribalMark(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 50 30" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 40 36" aria-hidden="true" {...props}>
+      {/* Outer woven diamond */}
       <path
-        d="M3 19c6-7 9 7 16 0s9-7 16 0 6-7 12 0"
-        stroke="#C8754B"
-        strokeWidth="3"
+        d="M20 2l16 16-16 16L4 18z"
         fill="none"
-        strokeLinecap="round"
+        stroke="#1FA85C"
+        strokeWidth="2.6"
+        strokeLinejoin="round"
       />
+      {/* Chevron weave */}
+      <path
+        d="M9 18l11-11 11 11M9 22l11 11 11-11"
+        fill="none"
+        stroke="#1FA85C"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+        opacity="0.55"
+      />
+      {/* Inner marigold lozenge */}
+      <path d="M20 9l8 9-8 9-8-9z" fill="#F4B81E" />
+      {/* Scarlet centre node */}
+      <circle cx="20" cy="18" r="3" fill="#DC3A2C" />
     </svg>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartProvider";
-import { CartIcon, WaveMark } from "./icons";
+import { CartIcon, TribalMark } from "./icons";
 
 const NAV_LINKS = [
   { href: "#towels", label: "Towels" },
@@ -68,11 +68,11 @@ export function Header() {
         <div className="wrap-wide flex h-[74px] items-center justify-between gap-6">
           <a
             href="#top"
-            className="flex items-center gap-2.5 font-display text-2xl font-semibold tracking-[0.01em] text-ink"
-            aria-label="Saltmist home"
+            className="flex items-center gap-2.5 font-display text-2xl font-extrabold tracking-[0.04em] text-ink"
+            aria-label="ZYNZYA home"
           >
-            <WaveMark className="h-[18px] w-[30px] flex-none" />
-            Saltmist
+            <TribalMark className="h-[26px] w-[29px] flex-none" />
+            ZYNZYA
           </a>
 
           <nav className="hidden items-center gap-[34px] md:flex" aria-label="Primary">

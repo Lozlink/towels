@@ -8,7 +8,7 @@
  */
 
 /** Cookie that carries the signed admin session JWT. */
-export const ADMIN_COOKIE_NAME = 'sm_admin';
+export const ADMIN_COOKIE_NAME = 'zy_admin';
 
 /** Session lifetime. Mirrors the JWT `exp` and the cookie `maxAge`. */
 export const SESSION_TTL_SECONDS = 8 * 60 * 60; // 8 hours
@@ -17,7 +17,7 @@ export const SESSION_TTL_SECONDS = 8 * 60 * 60; // 8 hours
 export const JWT_ALG = 'HS256';
 
 /** Stable subject/audience so tokens minted for other purposes can't be reused. */
-export const JWT_SUBJECT = 'saltmist-admin';
+export const JWT_SUBJECT = 'zynzya-admin';
 
 /**
  * The HS256 signing secret as raw bytes, or `null` when `ADMIN_JWT_SECRET` is

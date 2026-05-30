@@ -2,37 +2,36 @@
   "name": "saltmist-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Saltmist — plush, quick-drying bath towels made with bamboo viscose. Next.js storefront.",
+  "description": "ZYNZYA — towels made from 100% bamboo fibre, unblended. Next.js storefront (folder kept as saltmist-web).",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
     "jose": "^5.9.6",
-    "next": "16.2.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "next": "^16.2.6",
+    "react": "19.1.4",
+    "react-dom": "19.1.4"
   },
   "optionalDependencies": {
     "stripe": "^16.12.0"
   },
   "devDependencies": {
-    "@types/node": "^20.16.11",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.15",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.3"
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^24.12.4",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "tailwindcss": "^4.3.0",
+    "typescript": "~5.9.3"
   },
   "packageManager": "pnpm@9.12.1",
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=20.9.0"
   }
 }

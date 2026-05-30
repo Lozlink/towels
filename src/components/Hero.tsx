@@ -21,25 +21,27 @@ export function Hero() {
           {/* Type column — deliberately left-aligned, spanning 7 of 12. */}
           <div className="col-span-12 flex flex-col justify-center lg:col-span-7">
             <p className="index-tag mb-7 flex items-center gap-3">
-              <span className="h-px w-9 bg-ink-40" aria-hidden="true" />
-              Bath towels · 650 GSM
+              <span className="h-px w-9 bg-marigold" aria-hidden="true" />
+              Bamboo towels · 650 GSM
             </p>
 
             <h1
               id="hero-heading"
-              className="display-xl font-semibold text-ink"
+              className="display-xl font-extrabold text-ink"
             >
-              Softness,
+              Towels made from
               <br />
-              <span className="fr-italic font-normal text-terracotta">
-                settled.
+              <span className="text-terracotta">100% bamboo fibre.</span>
+              <br />
+              <span className="fr-italic font-normal text-ink-70">
+                No viscose. No blend.
               </span>
             </h1>
 
-            <p className="mt-8 max-w-[44ch] text-[19px] leading-relaxed text-ink-70 max-[680px]:text-[17px]">
-              Plush, quick-drying bath towels at 650 GSM — dense and soft
-              underhand, fast to dry on the rail. Considered design, labelled
-              plainly. For the quiet few minutes that are just yours.
+            <p className="mt-8 max-w-[46ch] text-[19px] leading-relaxed text-ink-70 max-[680px]:text-[17px]">
+              Woven from 100% bamboo fibre — unblended, with no viscose, cotton
+              or polyester. Soft, breathable and naturally absorbent at 650 GSM.
+              One plant, one cloth, labelled plainly.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
@@ -81,7 +83,7 @@ export function Hero() {
                 <span className="drape-fold absolute inset-y-0 right-0 w-10" />
               </div>
 
-              {/* Sea-mist sliver tucked behind, lower-right — a colour-story hint. */}
+              {/* Scarlet sliver tucked behind, lower-right — a colour-story hint. */}
               <div
                 className="fabric-mist terry-pile absolute bottom-12 right-2 h-[40%] w-[30%] overflow-hidden rounded-tl-[20px] border border-white/30 shadow-brand-md max-[860px]:hidden"
                 aria-hidden="true"
@@ -90,12 +92,12 @@ export function Hero() {
               </div>
 
               {/* Honest-label caption — quiet, offset low-left, sharp card. */}
-              <figcaption className="badge-float absolute bottom-5 left-2 z-[3] max-w-[230px] border-l-2 border-terracotta bg-bone-2/95 py-3 pl-4 pr-5 shadow-brand-md backdrop-blur-sm">
+              <figcaption className="badge-float absolute bottom-5 left-2 z-[3] max-w-[230px] border-l-[3px] border-marigold bg-bone-2/95 py-3 pl-4 pr-5 shadow-brand-md backdrop-blur-sm">
                 <b className="block font-display text-[17px] leading-tight">
                   Honestly labelled
                 </b>
                 <span className="mt-1 block text-[12.5px] leading-snug text-ink-55">
-                  70% bamboo viscose, 30% cotton · Made in Thailand
+                  100% bamboo fibre · Made in Thailand
                 </span>
               </figcaption>
             </figure>

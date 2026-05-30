@@ -32,9 +32,8 @@ export function ProductGrid() {
             </h2>
           </div>
           <p className="col-span-12 self-end text-[15px] text-ink-70 lg:col-span-4">
-            Five formats, four calm colourways. Same cloth throughout — 70%
-            bamboo viscose, 30% cotton at 650 GSM. Choose a colourway on any
-            piece.
+            Five formats, four colourways. Same cloth throughout — 100% bamboo
+            fibre, unblended, at 650 GSM. Choose a colourway on any piece.
           </p>
         </Reveal>
 

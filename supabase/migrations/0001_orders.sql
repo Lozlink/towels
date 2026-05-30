@@ -1,5 +1,5 @@
 -- 0001_orders.sql
--- Saltmist order persistence. Plain SQL migration (no ORM), matching the ANB
+-- ZYNZYA order persistence. Plain SQL migration (no ORM), matching the ANB
 -- migration style. All money is stored in integer cents.
 
 create extension if not exists "pgcrypto";

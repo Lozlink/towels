@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
  * GET /api/orders
  * Order *listing* is no longer public — it leaked every customer's details.
  * The protected, admin-only listing now lives at `GET /api/admin/orders`
- * (guarded by the `sm_admin` session). This handler returns 404 so the old
+ * (guarded by the `zy_admin` session). This handler returns 404 so the old
  * public surface no longer exists. Guest checkout (POST) is unchanged.
  */
 export function GET() {

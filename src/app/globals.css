@@ -1,32 +1,139 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /*
- * Saltmist global styles.
- * Tailwind handles layout/spacing in the components; this file ports the bits
- * that are awkward as utilities: base resets, the CSS-built textures/gradients,
- * keyframes, the FAQ accordion transition, the cart drawer, and the
- * reveal-on-scroll behaviour. All colours reference the brand palette.
+ * ZYNZYA — Tailwind v4 theme (CSS-first).
+ *
+ * Contemporary-ethnic brand built on a considered green-dominant triad with red
+ * + yellow accents over warm neutrals. The legacy utility NAMES are kept (bone,
+ * ink-70, terracotta, sand, mist, kelp, shadow-brand-sm, rounded-brand,
+ * max-w-wrap, …) so the storefront's art-directed markup keeps resolving, but
+ * every value is remapped to the ZYNZYA palette and woven-textile motif.
+ *
+ * Palette:
+ *   bamboo green  #1FA85C  (primary fills)            → remapped onto `mist`
+ *   green-ink     #127A42  (AA-safe green for text/CTA) → remapped onto `terracotta`
+ *   deep forest   #0E3B26  (dark sections / depth)    → remapped onto `kelp`
+ *   warm scarlet  #DC3A2C  (accent, decorative)       → `--color-scarlet`
+ *   marigold      #F4B81E  (accent, decorative)       → remapped onto `sand`
+ *   ink           #1A1714                              → `ink`
+ *   cream         #FBF6EC  (paper)                     → remapped onto `bone`
+ *   cream-2       #FFFDF7                              → remapped onto `bone-2`
+ *
+ * Contrast note: green-ink (#127A42) is the ONLY green used as text or as a
+ * button background with white text — it clears WCAG-AA on cream (~5:1) and
+ * under white (~4.7:1). Scarlet/marigold/bamboo-green are decorative fills only;
+ * yellow is never used as text on cream.
+ */
+@theme {
+  /* ----- Neutrals (paper + ink) ----- */
+  --color-bone: #fbf6ec; /* cream paper */
+  --color-bone-2: #fffdf7; /* lighter cream */
+
+  --color-ink: #1a1714;
+  --color-ink-70: rgba(26, 23, 20, 0.72);
+  --color-ink-55: rgba(26, 23, 20, 0.56);
+  --color-ink-40: rgba(26, 23, 20, 0.4);
+
+  /* ----- Green (dominant) ----- */
+  /* `terracotta*` is the legacy accent name used for text, links and CTAs, so
+     it must stay AA-safe → it carries the darker green-ink, not bright green. */
+  --color-terracotta: #127a42; /* green-ink: AA-safe on cream + under white */
+  --color-terracotta-dk: #0e5f33;
+
+  /* `mist` carries bright bamboo green for decorative fields/swatches. */
+  --color-mist: #1fa85c;
+  --color-mist-soft: #5fc488;
+
+  /* `kelp` carries the deep forest used for dark sections + footer.
+     `forest` is an explicit alias of the same value for readable markup. */
+  --color-kelp: #0e3b26;
+  --color-forest: #0e3b26;
+
+  /* ----- Accents (decorative fills only) ----- */
+  --color-scarlet: #dc3a2c;
+  --color-scarlet-dk: #b92c20;
+  --color-marigold: #f4b81e;
+
+  /* `sand` neutrals carry a warm marigold-tinted cream for soft blocks. */
+  --color-sand: #ecd9a6;
+  --color-sand-soft: #f6ead0;
+
+  --color-line: rgba(26, 23, 20, 0.13);
+  --color-line-soft: rgba(26, 23, 20, 0.07);
+
+  /* ----- Type ----- */
+  /* Wired to the next/font CSS variables exposed in app/layout.tsx. */
+  --font-display: var(--font-display), "Bricolage Grotesque", Georgia, serif;
+  --font-sans: var(--font-body), "Hanken Grotesk", system-ui, -apple-system,
+    sans-serif;
+
+  /* ----- Radius ----- */
+  --radius-brand: 14px;
+  --radius-brand-lg: 22px;
+
+  /* ----- Max width (drives max-w-wrap) ----- */
+  --container-wrap: 1200px;
+
+  /* ----- Shadow ----- */
+  --shadow-brand-sm: 0 1px 3px rgba(26, 23, 20, 0.07),
+    0 6px 16px rgba(26, 23, 20, 0.06);
+  --shadow-brand-md: 0 8px 30px rgba(26, 23, 20, 0.12);
+  --shadow-brand-lg: 0 24px 60px rgba(26, 23, 20, 0.18);
+  --shadow-cta: 0 6px 20px rgba(18, 122, 66, 0.3);
+  --shadow-cta-hover: 0 12px 28px rgba(18, 122, 66, 0.38);
+
+  /* ----- Easing ----- */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.25, 1);
+
+  /* ----- Animation ----- */
+  --animate-floatY: floatY 7s ease-in-out infinite;
+
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+}
+
+/*
+ * ZYNZYA global styles.
+ * Tailwind handles layout/spacing in the components; this file carries the bits
+ * awkward as utilities: base resets, the CSS-built woven/diamond textures,
+ * keyframes, the FAQ accordion, the cart drawer, and reveal-on-scroll. All
+ * colours reference the brand palette above.
  */
 
 @layer base {
   :root {
-    --bone: #f4efe6;
-    --bone-2: #fbf8f2;
-    --ink: #2e2a24;
-    --ink-70: rgba(46, 42, 36, 0.7);
-    --ink-55: rgba(46, 42, 36, 0.55);
-    --ink-40: rgba(46, 42, 36, 0.4);
-    --terracotta: #c8754b;
-    --terracotta-dk: #b0623b;
-    --sand: #d8c7ae;
-    --sand-soft: #e7ddcb;
-    --mist: #8fa3a0;
-    --kelp: #3f4a45;
-    --line: rgba(46, 42, 36, 0.12);
-    --line-soft: rgba(46, 42, 36, 0.07);
+    --cream: #fbf6ec;
+    --cream-2: #fffdf7;
+    --ink: #1a1714;
+    --ink-70: rgba(26, 23, 20, 0.72);
+    --ink-55: rgba(26, 23, 20, 0.56);
+    --ink-40: rgba(26, 23, 20, 0.4);
+    --green: #1fa85c; /* bamboo green */
+    --green-ink: #127a42; /* AA-safe green */
+    --green-ink-dk: #0e5f33;
+    --forest: #0e3b26;
+    --scarlet: #dc3a2c;
+    --scarlet-dk: #b92c20;
+    --marigold: #f4b81e;
+    --sand: #ecd9a6;
+    --sand-soft: #f6ead0;
+    --line: rgba(26, 23, 20, 0.13);
+    --line-soft: rgba(26, 23, 20, 0.07);
     --ease: cubic-bezier(0.2, 0.7, 0.25, 1);
+    /* Legacy aliases so any leftover var() references still resolve. */
+    --bone: var(--cream);
+    --bone-2: var(--cream-2);
+    --terracotta: var(--green-ink);
+    --terracotta-dk: var(--green-ink-dk);
+    --mist: var(--green);
+    --kelp: var(--forest);
   }
 
   * {
@@ -42,8 +149,9 @@
 
   body {
     margin: 0;
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-    background: var(--bone);
+    font-family: var(--font-body), "Hanken Grotesk", system-ui, -apple-system,
+      sans-serif;
+    background: var(--cream);
     color: var(--ink);
     font-size: 17px;
     line-height: 1.6;
@@ -55,11 +163,11 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 600;
-    line-height: 1.05;
+    font-family: var(--font-display), "Bricolage Grotesque", Georgia, serif;
+    font-weight: 700;
+    line-height: 1.04;
     margin: 0;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 
   p {
@@ -86,7 +194,7 @@
   }
 
   :focus-visible {
-    outline: 2.5px solid var(--terracotta);
+    outline: 2.5px solid var(--green-ink);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -124,12 +232,12 @@
   }
 
   .eyebrow {
-    font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-body), sans-serif;
     font-size: 12.5px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--green-ink);
     margin: 0 0 18px;
   }
 
@@ -154,82 +262,98 @@
     }
   }
 
-  /* Editorial display sizes — Fraunces as a design element. */
+  /* Editorial display sizes — Bricolage Grotesque as a design element. */
   .display-xl {
-    font-size: clamp(54px, 10vw, 132px);
-    line-height: 0.94;
-    letter-spacing: -0.03em;
+    font-size: clamp(54px, 10vw, 130px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
   }
   .display-lg {
-    font-size: clamp(38px, 6vw, 78px);
+    font-size: clamp(38px, 6vw, 76px);
     line-height: 0.98;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
   }
-  /* Optical-size italic moment for Fraunces. */
+  /* An accent treatment for the standout word in a heading. */
   .fr-italic {
     font-style: italic;
-    font-optical-sizing: auto;
-    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.01em;
   }
 
   /* A small left index marker used in lieu of centred eyebrows. */
   .index-tag {
-    font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-body), sans-serif;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-55);
   }
   .index-tag b {
-    color: var(--terracotta);
-    font-weight: 600;
+    color: var(--green-ink);
+    font-weight: 700;
   }
 
-  /* ---------- CSS-built textures / gradients ---------- */
+  /* ---------- CSS-built textures / gradients (woven / tribal) ---------- */
+  /* Warm atmospheric wash behind the hero — green-led with marigold + scarlet. */
   .hero-gradient {
     background: radial-gradient(
-        120% 90% at 78% 18%,
-        rgba(200, 117, 75, 0.2),
-        transparent 55%
+        120% 90% at 80% 16%,
+        rgba(244, 184, 30, 0.26),
+        transparent 56%
       ),
-      radial-gradient(90% 80% at 12% 88%, rgba(143, 163, 160, 0.28), transparent 60%),
-      radial-gradient(80% 70% at 95% 95%, rgba(216, 199, 174, 0.4), transparent 55%);
+      radial-gradient(95% 85% at 8% 90%, rgba(31, 168, 92, 0.3), transparent 60%),
+      radial-gradient(70% 70% at 98% 96%, rgba(220, 58, 44, 0.16), transparent 58%);
   }
 
+  /* A woven diamond lattice — the core ZYNZYA tribal-textile motif. */
   .hero-weave {
     opacity: 0.5;
     mix-blend-mode: multiply;
     background-image: repeating-linear-gradient(
-        90deg,
-        rgba(46, 42, 36, 0.035) 0 1px,
-        transparent 1px 7px
+        45deg,
+        rgba(26, 23, 20, 0.05) 0 1px,
+        transparent 1px 12px
       ),
-      repeating-linear-gradient(0deg, rgba(46, 42, 36, 0.045) 0 1px, transparent 1px 7px);
+      repeating-linear-gradient(
+        -45deg,
+        rgba(26, 23, 20, 0.05) 0 1px,
+        transparent 1px 12px
+      );
   }
 
+  /* Fine woven texture overlay for fabric blocks. */
   .towel-texture::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.18) 0 1px,
-      transparent 1px 5px
-    );
+        45deg,
+        rgba(255, 255, 255, 0.18) 0 1px,
+        transparent 1px 6px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.06) 0 1px,
+        transparent 1px 6px
+      );
     opacity: 0.6;
   }
 
+  /* Diamond weave on the folded-towel product field. */
   .fold-texture::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.16) 0 1px,
-        transparent 1px 6px
+        45deg,
+        rgba(255, 255, 255, 0.18) 0 1px,
+        transparent 1px 8px
       ),
-      repeating-linear-gradient(0deg, rgba(46, 42, 36, 0.05) 0 1px, transparent 1px 6px);
+      repeating-linear-gradient(
+        -45deg,
+        rgba(26, 23, 20, 0.07) 0 1px,
+        transparent 1px 8px
+      );
   }
 
   .thumb-texture::after {
@@ -237,78 +361,95 @@
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.18) 0 1px,
-      transparent 1px 5px
-    );
+        45deg,
+        rgba(255, 255, 255, 0.2) 0 1px,
+        transparent 1px 5px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.06) 0 1px,
+        transparent 1px 5px
+      );
   }
 
-  /* Macro weave panel */
+  /* Macro weave panel — green base with marigold/scarlet woven detail. */
   .weave-base {
-    background: linear-gradient(135deg, #e7ddcb, #d8c7ae 55%, #c9b696);
+    background: linear-gradient(135deg, #2bbd6b, #1fa85c 55%, #178a4a);
   }
   .weave-threads {
     background-image: repeating-linear-gradient(
-        90deg,
-        rgba(46, 42, 36, 0.1) 0 2px,
-        transparent 2px 11px
+        45deg,
+        rgba(255, 255, 255, 0.28) 0 2px,
+        transparent 2px 12px
       ),
-      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.3) 0 2px, transparent 2px 11px);
+      repeating-linear-gradient(
+        -45deg,
+        rgba(14, 59, 38, 0.32) 0 2px,
+        transparent 2px 12px
+      );
   }
+  /* Diamond lattice of bound loops — the tribal weave centrepiece. */
   .weave-loop {
     background-image: radial-gradient(
-      circle at 6px 6px,
-      rgba(255, 255, 255, 0.22) 2px,
+      circle at 7px 7px,
+      rgba(255, 255, 255, 0.26) 2px,
       transparent 3px
     );
-    background-size: 13px 13px;
+    background-size: 14px 14px;
   }
   .weave-terra-stripe::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.18) 0 2px,
-      transparent 2px 11px
+      45deg,
+      rgba(255, 255, 255, 0.22) 0 2px,
+      transparent 2px 12px
     );
   }
 
   /* ---------- Art-directed fabric fields (large editorial blocks) ---------- */
-  /* A tall, towel-like terry field — terracotta. Used in the hero. */
+  /* The hero drape: bamboo green terry field. */
   .fabric-terra {
-    background: linear-gradient(160deg, #d4895f 0%, #c8754b 55%, #b0623b 100%);
+    background: linear-gradient(160deg, #2bbd6b 0%, #1fa85c 55%, #167e45 100%);
   }
-  /* Bone / sand calm field. */
+  /* Cream / paper calm field. */
   .fabric-bone {
-    background: linear-gradient(155deg, #fbf8f2 0%, #efe7d7 60%, #e2d7c2 100%);
+    background: linear-gradient(155deg, #fffdf7 0%, #f6ead0 60%, #ecd9a6 100%);
   }
+  /* Marigold-tinted neutral field. */
   .fabric-sand {
-    background: linear-gradient(155deg, #e7ddcb 0%, #d8c7ae 55%, #c9b696 100%);
+    background: linear-gradient(155deg, #f6ead0 0%, #ecd9a6 55%, #e0c781 100%);
   }
+  /* Scarlet accent field (used as a small colour-story sliver). */
   .fabric-mist {
-    background: linear-gradient(155deg, #a4b6b3 0%, #8fa3a0 55%, #74908b 100%);
+    background: linear-gradient(155deg, #e8584b 0%, #dc3a2c 55%, #b92c20 100%);
   }
-  /* Dense terry pile — fine vertical loops plus a soft horizontal weave. */
+  /* Dense woven pile — fine diamond lattice plus a soft cross-weave. */
   .terry-pile::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.14) 0 1px,
-        transparent 1px 4px
+        45deg,
+        rgba(255, 255, 255, 0.16) 0 1px,
+        transparent 1px 6px
       ),
-      repeating-linear-gradient(0deg, rgba(46, 42, 36, 0.05) 0 1px, transparent 1px 9px);
+      repeating-linear-gradient(
+        -45deg,
+        rgba(26, 23, 20, 0.06) 0 1px,
+        transparent 1px 6px
+      );
     mix-blend-mode: soft-light;
     opacity: 0.9;
   }
-  /* The woven self-band running across a fabric field. */
+  /* A woven self-band — marigold thread running across a fabric field. */
   .self-band {
     background-image: repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.22) 0 2px,
-      transparent 2px 7px
+      90deg,
+      rgba(244, 184, 30, 0.85) 0 6px,
+      rgba(255, 255, 255, 0.22) 6px 9px,
+      transparent 9px 15px
     );
   }
   /* A folded selvedge edge / shadow line for the right of a draped field. */
@@ -316,13 +457,13 @@
     background: linear-gradient(
       90deg,
       transparent 0,
-      rgba(46, 42, 36, 0.16) 40%,
-      rgba(46, 42, 36, 0.04) 70%,
+      rgba(14, 59, 38, 0.22) 40%,
+      rgba(14, 59, 38, 0.06) 70%,
       transparent 100%
     );
   }
 
-  /* ---------- Running editorial line (replaces the stat trust strip) ---------- */
+  /* ---------- Running editorial line (the trust strip) ---------- */
   .marquee {
     overflow: hidden;
   }
@@ -339,15 +480,20 @@
   .signup-deco {
     background: radial-gradient(
         70% 90% at 90% 10%,
-        rgba(255, 255, 255, 0.18),
+        rgba(244, 184, 30, 0.32),
         transparent 55%
       ),
-      radial-gradient(60% 80% at 8% 95%, rgba(63, 74, 69, 0.3), transparent 55%);
+      radial-gradient(60% 80% at 8% 95%, rgba(14, 59, 38, 0.4), transparent 55%);
   }
+  /* Diamond weave overlay for the signup block. */
   .signup-weave {
-    opacity: 0.14;
-    background-image: repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 8px),
-      repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 8px);
+    opacity: 0.16;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #fff 0 1px,
+        transparent 1px 12px
+      ),
+      repeating-linear-gradient(-45deg, #fff 0 1px, transparent 1px 12px);
   }
 
   /* ---------- Hero floating animation ---------- */
@@ -391,8 +537,8 @@
     height: 13px;
   }
   .faq-trigger[aria-expanded="true"] .faq-plus {
-    background: var(--terracotta);
-    border-color: var(--terracotta);
+    background: var(--green-ink);
+    border-color: var(--green-ink);
     transform: rotate(135deg);
   }
   .faq-trigger[aria-expanded="true"] .faq-plus::before,

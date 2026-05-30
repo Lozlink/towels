@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import { CartProvider } from "@/components/CartProvider";
 import { buildJsonLd } from "@/lib/jsonLd";
@@ -10,19 +10,18 @@ import {
 } from "@/lib/site";
 import "./globals.css";
 
-// Both are variable fonts: omit `weight` to ship the full axis range. Fraunces
-// also exposes the optical-size axis, which we want for the soft display look.
-const fraunces = Fraunces({
+// Both are variable fonts: omit `weight` to ship the full axis range.
+// Bricolage Grotesque is the characterful display face; Hanken Grotesk is the
+// clean grotesque body. They wire into the Tailwind @theme via CSS variables.
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  axes: ["opsz"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
+  variable: "--font-display",
   display: "swap",
 });
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -30,25 +29,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "Saltmist — Softness, settled. Plush bath towels made with bamboo viscose.",
-    template: "%s · Saltmist",
+      "ZYNZYA — Towels made from 100% bamboo fibre. No viscose. No blend.",
+    template: "%s · ZYNZYA",
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
   keywords: [
     "bamboo towels",
-    "bamboo viscose towels",
-    "cotton bamboo towels",
+    "100% bamboo towels",
+    "bamboo fibre towels",
+    "unblended bamboo towels",
     "plush bath towels",
     "650 gsm towels",
-    "quick dry towels",
     "bath sheet",
     "hand towel",
     "Australia",
   ],
   alternates: {
-    // Canonical resolves against metadataBase → https://www.saltmist.com.au/
+    // Canonical resolves against metadataBase → https://www.zynzya.com.au/
     canonical: "/",
   },
   robots: {
@@ -64,29 +63,31 @@ export const metadata: Metadata = {
     locale: "en_AU",
     url: "/",
     title:
-      "Saltmist — Softness, settled. Plush towels made with bamboo viscose.",
+      "ZYNZYA — Towels made from 100% bamboo fibre. No viscose. No blend.",
     description:
-      "Plush, quick-drying 650 GSM towels made with bamboo viscose and cotton. Considered design, honest labelling. Designed in Australia, made in Thailand.",
+      "Towels made from 100% bamboo fibre — unblended, with no viscose, cotton or polyester. Soft, breathable, biodegradable. Designed in Australia, made in Thailand.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Saltmist bamboo viscose towels in Bone, Warm Sand, Sea Mist and Terracotta.",
+        alt: "ZYNZYA towels in Bamboo Green, Scarlet, Marigold and Cream — 100% bamboo fibre.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Saltmist — Softness, settled.",
+    title: "ZYNZYA — 100% bamboo fibre towels.",
     description:
-      "Plush, quick-drying 650 GSM towels made with bamboo viscose and cotton. Designed in Australia, made in Thailand.",
+      "Towels made from 100% bamboo fibre — unblended. Soft, breathable, biodegradable. Designed in Australia, made in Thailand.",
     images: ["/og-image.jpg"],
   },
   icons: {
     icon: {
+      // PLACEHOLDER tribal emblem (see README → "Logo / brand mark"). A woven
+      // diamond motif in the ZYNZYA triad; swap for the client's supplied mark.
       url:
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F4EFE6'/%3E%3Cpath d='M5 19c4-4 6 4 11 0s5-4 11 0' stroke='%23C8754B' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E",
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E3B26'/%3E%3Cpath d='M16 5l11 11-11 11L5 16z' fill='none' stroke='%231FA85C' stroke-width='2.4'/%3E%3Cpath d='M16 11l5 5-5 5-5-5z' fill='%23F4B81E'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23DC3A2C'/%3E%3C/svg%3E",
       type: "image/svg+xml",
     },
   },
@@ -96,7 +97,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F4EFE6",
+  themeColor: "#0E3B26",
   width: "device-width",
   initialScale: 1,
 };
@@ -105,7 +106,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const jsonLd = buildJsonLd();
 
   return (
-    <html lang="en-AU" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en-AU" className={`${bricolage.variable} ${hanken.variable}`}>
       <body>
         <script
           type="application/ld+json"

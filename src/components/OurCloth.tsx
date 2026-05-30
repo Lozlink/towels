@@ -1,3 +1,8 @@
+import {
+  ABSORBENCY_MULTIPLE_PLACEHOLDER,
+  SUBSTANTIATED_CLAIMS,
+  type SubstantiatedClaimKey,
+} from "@/lib/claims";
 import { Reveal } from "./Reveal";
 
 /**
@@ -7,22 +12,46 @@ import { Reveal } from "./Reveal";
  *  - specs woven into the prose as a running line, not a config widget
  *  - the three cloth notes set type-led, with small numeric markers rather than
  *    icon tiles
+ *  - a GATED "tested properties" rail: each entry is bound to a flag in
+ *    src/lib/claims.ts and renders ONLY when that flag is true. With the shipped
+ *    all-false defaults, the entire rail collapses to nothing — no antibacterial,
+ *    UV, hypoallergenic, antistatic, anti-scratch, anti-fungal, absorbency
+ *    multiple, or competitor "toxic process" copy reaches the page, metadata, or
+ *    JSON-LD. The copy lives here, conditionally, so flipping a verified flag
+ *    turns it on with no re-authoring.
  */
+interface GatedClaim {
+  readonly key: Exclude<
+    SubstantiatedClaimKey,
+    "absorbencyMultiple" | "competitorProcessContrast"
+  >;
+  readonly label: string;
+}
+
+const GATED_CLAIMS: readonly GatedClaim[] = [
+  { key: "antibacterial", label: "Naturally antibacterial" },
+  { key: "antifungal", label: "Anti-fungal" },
+  { key: "uvResistant", label: "UV resistant" },
+  { key: "hypoallergenic", label: "Hypoallergenic" },
+  { key: "antistatic", label: "Antistatic" },
+  { key: "antiScratch", label: "Anti-scratch (low pilling)" },
+];
+
 const NOTES = [
   {
     n: "i",
-    title: "Soft, dense, plush",
-    text: "The bamboo-viscose blend gives a fluid, cushioned hand — soft against skin without feeling thin.",
+    title: "100% bamboo fibre, unblended",
+    text: "One fibre, start to finish — no viscose, no cotton, no polyester quietly blended in. Soft against skin and breathable.",
   },
   {
     n: "ii",
-    title: "Highly absorbent, quick to dry",
-    text: "An open, airy weave drinks water fast, then dries quickly on the rail between uses.",
+    title: "Naturally absorbent, quick to dry",
+    text: "Bamboo fibre is naturally absorbent. An open, airy weave drinks water fast, then dries on the rail between uses.",
   },
   {
     n: "iii",
-    title: "650 GSM, considered design",
-    text: "Weighty and substantial, with a clean self-band detail. Built to look good a year in, not just on day one.",
+    title: "Biodegradable, renewable",
+    text: "Made from a fast-growing, renewable plant, and biodegradable at end of life — so the cloth returns to where it came from.",
   },
 ] as const;
 
@@ -60,23 +89,23 @@ export function OurCloth() {
                 <span className="h-px w-9 bg-ink-40" aria-hidden="true" />
                 Our cloth
               </p>
-              <h2 className="display-lg max-w-[14ch] font-semibold">
-                One cloth.{" "}
+              <h2 className="display-lg max-w-[14ch] font-extrabold">
+                One plant.{" "}
                 <span className="fr-italic font-normal text-terracotta">
-                  Made to be felt.
+                  One cloth.
                 </span>
               </h2>
               <p className="mt-7 max-w-[52ch] text-[19px] leading-relaxed text-ink-70 max-[680px]:text-[17px]">
-                We wove the whole range from a single blend, tuned for the thing
-                you actually notice: how it feels in the hand and how fast
-                it&apos;s ready to use again.
+                We wove the whole range from a single fibre — 100% bamboo,
+                unblended. No viscose, no cotton, no polyester. What you feel in
+                the hand is bamboo, and nothing else.
               </p>
 
               {/* Specs woven as a running line, not a widget. */}
               <p className="mt-9 border-y border-line py-5 font-display text-[clamp(17px,2vw,22px)] leading-snug text-ink">
-                <b className="text-terracotta">70%</b> bamboo viscose
+                <b className="text-terracotta">100%</b> bamboo fibre
                 <span className="px-2.5 text-ink-40">·</span>
-                <b className="text-terracotta">30%</b> cotton
+                <b className="text-terracotta">0%</b> blend
                 <span className="px-2.5 text-ink-40">·</span>
                 <b className="text-terracotta">650</b> GSM
                 <span className="px-2.5 text-ink-40">·</span>
@@ -103,6 +132,45 @@ export function OurCloth() {
                   </div>
                 ))}
               </dl>
+
+              {/*
+                GATED tested-properties rail. Every chip is bound to a flag in
+                src/lib/claims.ts; nothing renders until the owner enables a flag
+                against documented evidence (see CLAIMS.md). All-false by default
+                → this block produces no output.
+              */}
+              {(() => {
+                const enabled = GATED_CLAIMS.filter(
+                  (c) => SUBSTANTIATED_CLAIMS[c.key],
+                );
+                const showAbsorbency = SUBSTANTIATED_CLAIMS.absorbencyMultiple;
+                if (enabled.length === 0 && !showAbsorbency) return null;
+                return (
+                  <div className="mt-10 border-t border-line pt-7">
+                    <p className="index-tag mb-4">Independently tested</p>
+                    <ul className="flex flex-wrap gap-2.5">
+                      {enabled.map((c) => (
+                        <li
+                          key={c.key}
+                          className="rounded-full border border-mist/40 bg-mist/10 px-3.5 py-1.5 text-[13px] font-semibold text-terracotta"
+                        >
+                          {c.label}
+                        </li>
+                      ))}
+                      {showAbsorbency ? (
+                        <li className="rounded-full border border-mist/40 bg-mist/10 px-3.5 py-1.5 text-[13px] font-semibold text-terracotta">
+                          {ABSORBENCY_MULTIPLE_PLACEHOLDER} more absorbent than
+                          cotton
+                        </li>
+                      ) : null}
+                    </ul>
+                    <p className="mt-3 text-[12.5px] text-ink-55">
+                      Each property above is backed by an independent test report
+                      on file.
+                    </p>
+                  </div>
+                );
+              })()}
             </Reveal>
           </div>
         </div>

@@ -1,19 +1,63 @@
-`# Saltmist
+# ZYNZYA
 
-Storefront for **Saltmist** — plush, quick-drying bath towels made with bamboo
-viscose and cotton. Ported from the static prototype to **Next.js 14 (App
-Router) + TypeScript (strict) + Tailwind CSS**, ready to deploy on Vercel.
+> **Note on naming.** The brand is **ZYNZYA**, but the project **folder** and the
+> npm package are intentionally kept as `saltmist-web` (per brief — don't rename
+> the directory). Only the *brand* changed: UI, metadata, JSON-LD, favicon, cart,
+> admin, copy, palette and fonts. Internal identifiers that aren't user-facing
+> were also rebranded for consistency (admin cookie `zy_admin`, JWT subject
+> `zynzya-admin`, order-number prefix `ZY-`).
+
+Storefront for **ZYNZYA** — towels made from **100% bamboo fibre**, unblended
+(no viscose, cotton or polyester). **Next.js 16 (App Router) + React 19 +
+TypeScript (strict) + Tailwind v4**, ready to deploy on Vercel.
 
 ## Stack
 
-- Next.js 14 App Router (`src/app/` directory)
+- Next.js 16 App Router (`src/app/`), built with **Turbopack** (`next build --turbopack`)
+- React 19
 - TypeScript in `strict` mode (`noUncheckedIndexedAccess`, `noUnusedLocals`, …)
 - Server-side order API (route handlers) with authoritative, catalogue-derived pricing
 - Optional Supabase persistence + optional Stripe payment intents (both degrade gracefully)
-- Tailwind CSS with the brand palette encoded as named colours
-- `next/font/google` for Fraunces (display) + Inter (body)
+- **Tailwind v4, CSS-first**: the theme lives in an `@theme` block in
+  `src/app/globals.css` (there is **no `tailwind.config.ts`**)
+- `next/font/google` for **Bricolage Grotesque** (display) + **Hanken Grotesk**
+  (body), wired into the `@theme` as CSS variables
 - In-memory cart via React Context + `useReducer` (no persistence; no `localStorage`)
 - pnpm
+
+## Brand
+
+- **Name:** ZYNZYA. Contemporary-ethnic, Thai/Southeast-Asian woven-textile
+  aesthetic (the bamboo is from Thailand) — CSS-built geometric/diamond weave
+  motifs, bold blocks, asymmetric editorial layout.
+- **Palette (green-dominant triad over warm neutrals):**
+  - bamboo green `#1FA85C` (primary fills) · green-ink `#127A42` (AA-safe green
+    for text + CTA) · deep forest `#0E3B26` (dark sections)
+  - warm scarlet `#DC3A2C` and marigold `#F4B81E` (decorative accents only)
+  - ink `#1A1714` · cream `#FBF6EC` (paper) · cream-2 `#FFFDF7`
+  - **Contrast:** green-ink is the only green used as text / as a white-text
+    button background — it clears WCAG-AA on cream (~5:1) and under white
+    (~4.7:1). Scarlet/marigold/bamboo-green are fills only; yellow is never used
+    as text on cream.
+  - The legacy Tailwind colour *names* are reused but remapped: `bone`→cream,
+    `terracotta`→green-ink, `mist`→bamboo green, `kelp`/`forest`→deep forest,
+    `sand`→marigold-tinted neutral, plus `scarlet` and `marigold` tokens.
+- **Fonts:** Bricolage Grotesque (display) + Hanken Grotesk (body), via
+  `next/font/google` → `--font-display` / `--font-body` → `@theme`.
+
+### Logo / brand mark (placeholder)
+
+The client will supply their own **"tribal symbol"** logo. Until then there's a
+**PLACEHOLDER geometric tribal-style emblem** built as inline SVG — a woven
+diamond / chevron mark in the brand triad. It's used as the wordmark lockup
+(header + footer) and the favicon. **To swap it for the real mark, replace two
+things:**
+
+1. `TribalMark` in **`src/components/icons.tsx`** (the header/footer lockup mark).
+2. The `icons.icon.url` **favicon data-URI** in **`src/app/layout.tsx`** (a
+   matching small version of the same emblem).
+
+Both are clearly commented as placeholders.
 
 ## Getting started
 
@@ -40,8 +84,8 @@ pnpm lint         # next lint
 saltmist-web/
 ├─ src/
 │  ├─ app/
-│  │  ├─ globals.css        # base resets, CSS textures/gradients, accordion + drawer + reveal
-│  │  ├─ layout.tsx         # fonts, Metadata API, JSON-LD, CartProvider
+│  │  ├─ globals.css        # Tailwind v4 @theme (palette, fonts, shadows), CSS weave textures, accordion + drawer + reveal
+│  │  ├─ layout.tsx         # fonts (Bricolage + Hanken), Metadata API, JSON-LD, placeholder favicon, CartProvider
 │  │  ├─ page.tsx           # section composition
 │  │  └─ api/
 │  │     ├─ products/route.ts             # GET catalogue
@@ -53,10 +97,12 @@ saltmist-web/
 │  │  ├─ CartProvider.tsx   # cart context (useReducer) + free-shipping logic
 │  │  ├─ CartDrawer.tsx     # slide-in drawer: cart → checkout form → success
 │  │  ├─ Header.tsx         # sticky nav, mobile menu, cart count + bump
-│  │  ├─ Hero.tsx … Footer.tsx, Reveal.tsx, icons.tsx
+│  │  ├─ OurCloth.tsx       # cloth section + GATED "tested properties" rail (claims.ts)
+│  │  ├─ Hero.tsx … Footer.tsx, Reveal.tsx, icons.tsx (incl. TribalMark placeholder)
 │  └─ lib/
 │     ├─ products.ts        # Product type (incl. sku) + data + MATERIAL constant
-│     ├─ colourways.ts      # the four colourways
+│     ├─ claims.ts          # SUBSTANTIATED_CLAIMS gate (all false) — see CLAIMS.md
+│     ├─ colourways.ts      # the four colourways (ids stable; names/swatches rebranded)
 │     ├─ format.ts          # AUD formatters (dollars + integer-cents) + toCents
 │     ├─ site.ts            # SITE_URL, name, slogan, free-shipping threshold
 │     ├─ jsonLd.ts          # schema.org @graph builder
@@ -71,7 +117,7 @@ saltmist-web/
 │        └─ client.ts       # submitOrder() — browser fetch helper
 ├─ supabase/
 │  └─ migrations/0001_orders.sql  # orders + order_items tables, indexes, trigger
-├─ tailwind.config.ts    # brand palette, fonts, shadows, keyframes
+├─ CLAIMS.md             # claims register: each gated claim, legal basis, what unlocks it
 ├─ next.config.mjs
 ├─ postcss.config.mjs
 ├─ .env.example
@@ -92,9 +138,9 @@ All routes live under `src/app/api`. JSON in, JSON out, with a consistent
 | `/api/products` | GET | Returns `{ products, material, currency }`. Catalogue is the single source of truth for prices (whole-dollar + derived `priceCents`). |
 | `/api/orders` | POST | Guest checkout (unauthenticated). Body `{ lines: [{ sku, colourway, quantity }], customer: { email, name, shippingAddress } }`. Returns `201 { success, order }`. |
 | `/api/orders` | GET | **Removed (404).** Listing every order publicly leaked customer data; use the protected `GET /api/admin/orders` instead. |
-| `/api/orders/[id]` | GET | `id` is the order UUID **or** the `order_number` (e.g. `SM-…`). `404` if missing or DB not configured. |
+| `/api/orders/[id]` | GET | `id` is the order UUID **or** the `order_number` (e.g. `ZY-…`). `404` if missing or DB not configured. |
 | `/api/checkout/payment-intent` | POST | Body `{ lines: [...] }`. Returns `{ clientSecret, amountCents, currency }`, or `503 { error: 'Payments not configured' }` when no Stripe key. |
-| `/api/admin/login` | POST | Body `{ username, password }`. Sets the `sm_admin` cookie. `200 { success }` / `401 { error }`. |
+| `/api/admin/login` | POST | Body `{ username, password }`. Sets the `zy_admin` cookie. `200 { success }` / `401 { error }`. |
 | `/api/admin/logout` | POST | Clears the cookie. `200 { success }` (idempotent). |
 | `/api/admin/session` | GET | `200 { authenticated: boolean }`. |
 | `/api/admin/orders` | GET | **Admin-only.** Up to 50 recent orders. `401` without a session, `501` when DB unconfigured. |
@@ -167,11 +213,11 @@ cookie and reorganizes the code into a clean module.
 ### How it works
 
 - **Token:** a `jose` **HS256 JWT** signed with `ADMIN_JWT_SECRET`, subject
-  `saltmist-admin`, 8h expiry. `jose` + Web Crypto means it verifies in the edge
+  `zynzya-admin`, 8h expiry. `jose` + Web Crypto means it verifies in the edge
   runtime, so `middleware.ts` can check it — no native modules, nothing that
   breaks `next build`.
 - **Cookie:** stored in an **httpOnly**, `sameSite=lax`, `path=/` cookie named
-  **`sm_admin`** (`secure` in production), `maxAge` 8h.
+  **`zy_admin`** (`secure` in production), `maxAge` 8h.
 - **Credentials:** checked against env in `src/lib/auth/credentials.ts` using a
   timing-safe compare. The password may be supplied as a **SHA-256 hash**
   (`ADMIN_PASSWORD_HASH`, recommended) computed via Web Crypto, **or** as
@@ -234,22 +280,52 @@ each order's status (`paid` / `fulfilled` / `cancelled`) and log out.
 - Metadata is implemented via the App Router Metadata API in `app/layout.tsx`
   (title template, description, canonical via `metadataBase` + `alternates`,
   Open Graph, Twitter, robots; `themeColor` lives in the `viewport` export per
-  Next 14).
+  Next 16).
 - JSON-LD (`@graph`: Organization, WebSite, ItemList of the 5 products with AUD
   offers, FAQPage) is built as a typed object in `lib/jsonLd.ts` and injected
   via `<script type="application/ld+json">`.
 
-## Compliance copy
+## Claims, compliance & the substantiation gate
 
-All claims-safe copy is preserved verbatim from the source:
+The product premise is **100% natural bamboo fibre, unblended** — which is the
+brand's whole differentiator and its biggest legal exposure. Claims are split
+into two tiers, and **the whole register lives in [`CLAIMS.md`](./CLAIMS.md)**.
 
-- Fibre stated only as **"70% bamboo viscose, 30% cotton"** / "made with bamboo viscose".
-- Origin only **"Designed in Australia, made in Thailand"** / "Made in Thailand".
-- No "100% bamboo", "naturally antibacterial", "antimicrobial", "hypoallergenic",
-  unqualified "eco/sustainable/biodegradable/chemical-free", or "UV protection".
-- The honest rayon FAQ ("Is this bamboo or rayon?") stays, first in the list.
+**Live by default (defensible, no lab cert beyond supplier fibre docs):**
 
-Treat this copy as load-bearing — edit it through marketing/compliance, not casually.
+- Fibre stated as **"100% bamboo fibre"**, **unblended** (no viscose, cotton or
+  polyester). This is the only fibre wording used, and it feeds the JSON-LD
+  `material`.
+- **Naturally absorbent** — qualitative only, **no numeric multiple**.
+- Soft, breathable, durable (650 GSM), renewable plant, biodegradable.
+- Origin only **"Designed in Australia, made in Thailand"** — never implies
+  Australian manufacture.
+- The flagship trust FAQ — **"Is it really 100% bamboo — not viscose?"** — stays
+  first in the list.
+
+**Gated behind flags in `src/lib/claims.ts` (all `false` by default):** naturally
+antibacterial, anti-fungal, UV resistant, hypoallergenic, antistatic,
+anti-scratch, any numeric absorbency multiple, and the competitor "toxic process"
+contrast. With the shipped defaults **none of these render anywhere** — not on
+the page, not in `<meta>`, not in JSON-LD. The risky copy lives in the components
+(`OurCloth.tsx` properties rail; the competitor paragraph in `faqs-data.tsx`)
+**conditionally rendered**, so flipping a verified flag turns it on with no
+re-authoring. There is **no "world's first" and no fabricated "300x"** anywhere —
+the absorbency multiple, if ever enabled, uses a `[Nx — pending test]`
+placeholder the owner fills from a real test.
+
+See **[`CLAIMS.md`](./CLAIMS.md)** for each gated claim's legal basis (ACCC
+s18/s29 misleading conduct, greenwashing enforcement priority, FTC bamboo-textile
+precedent) and the specific evidence that unlocks it. **Nothing risky is live by
+default; the owner vets and signs off before any flag ships `true`.**
+
+> **Foundational caveat:** the entire page rests on the fibre actually being
+> natural bamboo and not bamboo viscose (rayon). If an independent fibre analysis
+> shows viscose, the "100% natural bamboo" headline is itself false — that's a
+> launch blocker, not a gated extra. See CLAIMS.md §2 (last row).
+
+Treat all on-page claims as load-bearing — edit them through marketing/compliance
+and the claims gate, not casually.
 
 ## Deploying to Vercel
 
@@ -263,8 +339,11 @@ Treat this copy as load-bearing — edit it through marketing/compliance, not ca
 ## Placeholders to resolve before launch
 
 - **`SITE_URL`** in `lib/site.ts` is set to the placeholder
-  `https://www.saltmist.com.au`. It feeds `metadataBase`, the canonical URL, Open
+  `https://www.zynzya.com.au`. It feeds `metadataBase`, the canonical URL, Open
   Graph/Twitter URLs, and the JSON-LD `@id`s. Update it to the real domain.
+- **Brand mark** — the `TribalMark` emblem (`src/components/icons.tsx`) and the
+  matching favicon data-URI (`src/app/layout.tsx`) are placeholders; swap both
+  for the client's supplied tribal symbol (see "Logo / brand mark" above).
 - **`/og-image.jpg`** is referenced for Open Graph/Twitter (1200×630) but not
   included. Add a `public/og-image.jpg` (and update the alt text if needed).
 - **Social links** in `Footer.tsx` and **Stockists** point to `#` — wire to real
